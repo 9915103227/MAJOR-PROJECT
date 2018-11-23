@@ -7,10 +7,10 @@ import org.apache.log4j._
 object kMean extends App {
   Logger.getLogger("org").setLevel(Level.ERROR)
   val sc=new SparkContext("local[*]","")
-  val data=sc.textFile("/home/pranav/Desktop/MAJOR PROJECT/K_Means/sample.csv")
+  val data=sc.textFile("/home/pranav/Desktop/MAJOR PROJECT/K_Means/cancerNew.csv")
   val parsedData = data.map(s => Vectors.dense(s.split(',').map(_.toDouble))).cache()
-  val iter=600
-  val noOfClusterIteration=50// check from no of cluster=0 to no of cluster=30;
+  val iter=10000
+  val noOfClusterIteration=199// check from no of cluster=0 to no of cluster=30;
   var wsse=new Array[Double](noOfClusterIteration) 
   for(i<-1 to noOfClusterIteration){
     val clusters = KMeans.train(parsedData, i, iter)
